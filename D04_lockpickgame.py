@@ -23,33 +23,46 @@ reading = 0
 
 ########################################################################################################
 
-potran = random.randint(0, 65535)# creates a random number between 0 and 65535
+# creates a random number between 0 and 65535
+potran = random.randint(0, 65535)
 
-potrandv = round(potran/1000, 0)# devides potran number by 1000 and rounds to closest int
+# devides potran number by 1000 and rounds to closest int
+potrandv = round(potran/1000, 0)
 
-while gcount < 10:# time delay so lock isnt instantly picked
+# time delay so lock isnt instantly picked
+while gcount < 10:
 
-    time.sleep(0.1)# short delay
+    # short delay
+    time.sleep(0.1)
     
-    reading = potentiometer.read_u16()# sets var reading to potentiometer value
+    # sets var reading to potentiometer value
+    reading = potentiometer.read_u16()
     
-    readingdv = round(reading/1000, 0)# devides reading by 1000 and rounds to closest int
+    # devides reading by 1000 and rounds to closest int
+    readingdv = round(reading/1000, 0)
     
-    if readingdv == potrandv:# if potentiometer input is equal to random number
+    # if potentiometer input is equal to random number
+    if readingdv == potrandv:
         
+        # turn on green led
         red.duty_u16(0)
         amber.duty_u16(0)
-        green.duty_u16(65535)# turn on green led
-        gcount = gcount + 1# adds 1 to gcount
+        green.duty_u16(65535)
         
-    elif readingdv != potrandv:# if potentiometer input is not equal to random number
+        # adds 1 to gcount
+        gcount = gcount + 1
         
+    # if potentiometer input is not equal to random number    
+    elif readingdv != potrandv:
+        
+        #turns off all leds
         red.duty_u16(0)
         amber.duty_u16(0)
         green.duty_u16(0)
 
+# prints when lock is picked
 if gcount == 10:
-    print("green lock picked")# prints when lock is picked
+    print("green lock picked")
     
 ########################################################################################################
     
